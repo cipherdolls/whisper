@@ -1,0 +1,27 @@
+services:
+  whisper:
+    build: .
+    ports:
+      - "9000:9000"
+    environment:
+      - ASR_MODEL=large-v3-turbo
+      - COMPUTE_TYPE=float16
+    volumes:
+      - whisper-models:/root/.cache/huggingface
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    healthcheck:
+      test: ["CMD", "python3", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:9000/health')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+
+volumes:
+  whisper-models:
+    driver: local

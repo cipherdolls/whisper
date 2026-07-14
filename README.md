@@ -6,7 +6,7 @@ Uses [faster-whisper](https://github.com/SYSTRAN/faster-whisper) with CTranslate
 
 ## Quick Start
 
-Run from Docker Hub:
+Run from [Docker Hub](https://hub.docker.com/r/ffaerber/whisper-cuda):
 
 ```yaml
 # docker-compose.yml
